@@ -7,7 +7,7 @@ The project was created as a hands-on exercise to understand how local language 
 ## Demo
 
 <div align="center">
-    <img src=".assets/images/image.png">
+    <img src="assets/images/image.png">
     <p><em>A demo of the app running locally with gradio interface.</em></p>
 </div>
 
