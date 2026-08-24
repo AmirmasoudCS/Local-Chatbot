@@ -55,4 +55,8 @@ def build_demo():
             gr.ChatInterface(**kwargs)
 
     return demo
+
+if __name__ == "__main__":
+    demo = build_demo()
+    
     
