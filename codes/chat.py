@@ -7,23 +7,29 @@ client = OpenAI(
     base_url="http://localhost:11434/v1",
     api_key="ollama",
 )
+MODEL = os.environ.get("GEMMA_MODEL", "gemma4:e4b")
 
-question = input("Ask local Gemma: ")
+messages = [
+    {"role": "system", "content": "You are a helpful, friendly assistant."}
+]
 
-response = client.chat.completions.create(
-    model=os.environ.get("GEMMA_MODEL", "gemma4:e4b"),
-    messages=[{"role": "user", "content": question}],
-    stream=STREAM,
-)
-
-if STREAM:
-    for chunk in response:
+while True:
+    user_input = input("You: ")
+    if user_input.lower() in ("quit", "exit"):
+        break
+    messages.append({"role":"user","content":user_input})
+    stream = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        stream=STREAM,
+    )
+    print("Gemma: ", end="", flush=True)
+    reply = ""
+    for chunk in stream:
         content = chunk.choices[0].delta.content
-
         if content:
             print(content, end="", flush=True)
-
-    print()  # newline after streaming finishes
-
-else:
-    print(response.choices[0].message.content)
+            reply += content
+    print("\n")
+    messages.append({"role":"assistant", "context":reply})
+    
