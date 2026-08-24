@@ -6,6 +6,7 @@ STREAM = True
 client = OpenAI(
     base_url="http://localhost:11434/v1",
     api_key="ollama",
+    timeout=60.0,
 )
 
 MODEL = os.environ.get("GEMMA_MODEL", "gemma4:e4b")
