@@ -4,6 +4,13 @@ A small project built to explore **running and interacting with a local LLM** us
 
 The project was created as a hands-on exercise to understand how local language models can be connected to a Python application and used to build a simple conversational interface.
 
+## Demo
+
+<div align="center">
+    <img src=".assets/images/image.png">
+    <p><em>A demo of the app running locally with gradio interface.</em></p>
+</div>
+
 ## Features
 
 - Run an LLM locally with Ollama
