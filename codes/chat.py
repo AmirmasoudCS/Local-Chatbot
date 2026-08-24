@@ -10,7 +10,7 @@ question = input("Ask local Gemma: ")
 
 response = client.chat.completions.create(
     model=os.environ.get("GEMMA_MODEL", "gemma4"),
-    messages=[{"role":"user", "content":"question"}],
+    messages=[{"role":"user", "content":question}],
 )
 
 print(response.choices[0].message.content)
