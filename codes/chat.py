@@ -28,26 +28,31 @@ while True:
         "content": user_input
     })
 
-    stream = client.chat.completions.create(
-        model=MODEL,
-        messages=messages,
-        stream=STREAM,
-    )
+    try:
+        stream = client.chat.completions.create(
+            model=MODEL,
+            messages=messages,
+            stream=STREAM,
+        )
 
-    print("Gemma: ", end="", flush=True)
+        print("Gemma: ", end="", flush=True)
 
-    reply = ""
+        reply = ""
 
-    for chunk in stream:
-        content = chunk.choices[0].delta.content
+        for chunk in stream:
+            content = chunk.choices[0].delta.content
 
-        if content:
-            print(content, end="", flush=True)
-            reply += content
+            if content:
+                print(content, end="", flush=True)
+                reply += content
 
-    print("\n")
+        print("\n")
 
-    messages.append({
-        "role": "assistant",
-        "content": reply
-    })
+        messages.append({
+            "role": "assistant",
+            "content": reply
+        })
+    except Exception as e:
+        print(f"\n[Error talking to Gemma: {e}]")
+        print("Is Ollama running? Try 'ollama serve' or chck the model name.\n")
+        messages.pop()
