@@ -46,7 +46,7 @@ pip install openai gradio
 Make sure Ollama is installed and running, and that the desired model is available locally. For example:
 
 ```bash
-ollama pull llama3.1
+ollama pull gemma4:e4b
 ```
 
 By default, Ollama exposes its OpenAI-compatible API at `http://localhost:11434/v1`. If your Ollama instance runs elsewhere, update the base URL in `app.py` / `chat.py` accordingly.
