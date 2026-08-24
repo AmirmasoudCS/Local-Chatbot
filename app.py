@@ -35,3 +35,24 @@ def chat(message, history):
         if content:
             reply+=content
             yield reply
+
+def build_demo():
+    css =   """
+            .gradio-container{
+                height: 100vh !important;
+            }
+            """
+    with gr.Blocks(fiil_height=True, css=css) as demo:
+        kwargs = dict(
+            fn=chat,
+            title="Local Gemma 4 Model",
+            description="Powered entirely by Gemma 4 running locally on the machine.",
+            fill_height=True,
+        )
+        try:
+            gr.ChatInterface(type="messages", **kwargs)
+        except TypeError:
+            gr.ChatInterface(**kwargs)
+
+    return demo
+    
