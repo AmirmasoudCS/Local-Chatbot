@@ -9,7 +9,7 @@ client = OpenAI(
 question = input("Ask local Gemma: ")
 
 response = client.chat.completions.create(
-    model=os.environ.get("GEMMA_MODEL", "gemma4"),
+    model=os.environ.get("GEMMA_MODEL", "gemma4:e4b"),
     messages=[{"role":"user", "content":question}],
 )
 
