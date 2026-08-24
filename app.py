@@ -18,3 +18,20 @@ def normalize_history(history):
             if bot_msg:
                 messages.append({"role":"assistant", "content":bot_msg})
     return messages
+
+def chat(message, history):
+    messages = [{"role": "system", "content": "You are a helpful assistant."}]
+    messages += normalize_history(history)
+    messages.append({"role":"user", "content":message})
+
+    stream = client.chat.completions.create(
+        model=MODEL,
+        messages=messages,
+        stream=True,
+    )
+    reply = ""
+    for chunk in stream:
+        content = chunk.choices[0].delta.content
+        if content:
+            reply+=content
+            yield reply
